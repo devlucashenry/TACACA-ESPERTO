@@ -15,7 +15,6 @@ def tela_produtos(tela_anterior, pedido):
     cur.execute("""
         SELECT ID_PRODUTO, DESCRICAO, TIPO, PRECO
         FROM PRODUTO
-        WHERE ATIVO = 'S'
         ORDER BY DESCRICAO
     """)
 
@@ -30,7 +29,6 @@ def tela_produtos(tela_anterior, pedido):
     lista = tk.Listbox(root, width=40, height=10)
     lista.pack(pady=10)
 
-    # agora bate exatamente com a query
     for id_prod, descricao, tipo, preco in produtos:
         lista.insert(
             tk.END,
@@ -43,37 +41,4 @@ def tela_produtos(tela_anterior, pedido):
             return
 
         index = lista.curselection()[0]
-        id_prod, descricao, tipo, preco = produtos[index]
-
-        pedido["itens"].append({
-            "id_produto": id_prod,
-            "descricao": descricao,
-            "tipo": tipo,
-            "preco": float(preco)
-        })
-
-        messagebox.showinfo(
-            "Adicionado",
-            f"{descricao} adicionado ao pedido"
-        )
-
-    tk.Button(
-        root,
-        text="Adicionar ao Pedido",
-        width=25,
-        command=adicionar
-    ).pack(pady=10)
-
-    def voltar():
-        cur.close()
-        conn.close()
-        root.destroy()
-
-    tk.Button(
-        root,
-        text="Voltar",
-        width=25,
-        command=voltar
-    ).pack(pady=10)
-
-    root.mainloop()
+        id_prod, descricao_
